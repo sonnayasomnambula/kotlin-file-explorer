@@ -21,6 +21,7 @@ fun getFilesFromPath(path: String, showHiddenFiles: Boolean = false, onlyFolders
     return file.listFiles()
             .filter { showHiddenFiles || !it.name.startsWith(".") }
             .filter { !onlyFolders || it.isDirectory }
+            .sortedWith(compareBy({ !it.isDirectory }, { it.absolutePath }))
             .toList()
 }
 
